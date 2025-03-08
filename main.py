@@ -33,6 +33,7 @@ def sauvegarder_config():
 
 try:
     token = dotenv_values(".env")["TELEGRAM_TOKEN"]
+    print("Utilisation du token dans le fichier .env")
 except Exception:
     token = os.environ['TELEGRAM_TOKEN']
 
@@ -158,7 +159,7 @@ dispatcher.add_handler(MessageHandler(Filters.text, gerer_message))
 dispatcher.add_error_handler(gerer_erreur)
 
 # Message de démarrage
-updater.bot.send_message(chat_id=config["ADMIN_CHAT_ID"], text=f"{RENARD} Le bot Fox Music est opérationnel !")
+# updater.bot.send_message(chat_id=config["ADMIN_CHAT_ID"], text=f"{RENARD} Le bot Fox Music est opérationnel !")
 
 updater.start_polling(poll_interval=0.8)
 updater.idle()

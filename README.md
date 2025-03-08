@@ -1,4 +1,4 @@
-# 🎵 Telegram Spotify Downloader
+# 🎵 Telegram Spotify Downloader 🦊
 
 <p align="center">
   <a href="https://www.python.org">
@@ -19,86 +19,130 @@
   </a>  
 </p>
 
-## 🦊 Qu'est-ce que c'est ?
-C'est un bot Telegram qui permet de télécharger des musiques et des playlists Spotify en MP3 directement depuis YouTube. 🎶✨
+## 🦊 Introduction
+Un bot Telegram puissant pour télécharger des musiques et playlists Spotify en MP3 directement depuis YouTube. 🎶✨
+![logo](https://static.vecteezy.com/system/resources/previews/031/737/196/non_2x/spotify-icon-spotify-social-media-logo-free-png.png)
+## 🛠 Prérequis
 
-### Ce que vous pouvez télécharger :
-✅ Une seule chanson
-✅ Un album complet
-✅ Une playlist entière
-✅ Tous les morceaux d'un artiste
+### Python 3.7 Obligatoire
 
-📸 **Aperçu** :
-<img src="https://github.com/Tiger-Foxx/Spotify-me/blob/master/demo.png" width="450" />
+#### Windows :
+1. Télécharger Python 3.7 : [python.org/downloads/release/python-3710](https://www.python.org/downloads/release/python-3710/)
+2. Pendant l'installation :
+   - Cocher "Add Python to PATH"
+   - Choisir "Custom installation"
+   - Installer pour tous les utilisateurs
 
-## 🚀 Comment l'utiliser ?
-
-### 1️⃣ Configuration
-Ajoutez votre token de bot Telegram dans un fichier `.env` avec la clé :
+#### Linux :
+```bash
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.7 python3.7-venv
 ```
+
+#### macOS :
+```bash
+brew install pyenv
+pyenv install 3.7.16
+pyenv global 3.7.16
+```
+
+## 🚀 Installation Locale
+
+### 1. Cloner le dépôt
+```bash
+git clone https://github.com/Tiger-Foxx/Spotify-me.git
+cd Spotify-me
+```
+
+### 2. Créer l'environnement virtuel
+
+#### Windows :
+```cmd
+py -3.7 -m venv fox_env
+fox_env\Scripts\activate
+```
+
+#### Linux/macOS :
+```bash
+python3.7 -m venv fox_env
+source fox_env/bin/activate
+```
+
+### 3. Mettre à jour pip
+```bash
+python -m pip install --upgrade pip
+```
+
+### 4. Installer les dépendances
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Configuration
+Créer un fichier `.env` à la racine :
+```env
 TELEGRAM_TOKEN=VOTRE_TOKEN_ICI
 ```
 
-### 2️⃣ Installation des dépendances
-Avant de lancer le bot, assurez-vous d'avoir installé les dépendances requises :
-```
-pip install -r requirements.txt
-sudo snap install ffmpeg
-npm install -g spotify-dl
-```
-
-### 3️⃣ Exécution du bot
-Lancez simplement le bot avec :
-```
+### 6. Lancer le bot
+```bash
 python main.py
 ```
 
-## 🔑 Authentification
+## ☁️ Déploiement
 
-Le bot propose une authentification simple. Pour l’activer, modifiez le fichier de configuration et mettez :
+### Option 1 : Heroku
+1. Cliquer sur ce bouton :  
+   [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Tiger-Foxx/Spotify-me)
+2. Ajouter les variables d'environnement :
+   - `TELEGRAM_TOKEN` : Votre token de bot
+   - `PYTHON_VERSION` : `3.7.16`
+
+### Option 2 : Render
+1. Créer un nouveau Web Service
+2. Configurer :
+   - Runtime : Python 3.7
+   - Build Command : `pip install -r requirements.txt`
+   - Start Command : `python main.py`
+3. Ajouter les variables d'environnement
+
+### Option 3 : Docker
+```bash
+docker build -t telegram-spotify-downloader .
+docker run -d -e TELEGRAM_TOKEN=VOTRE_TOKEN telegram-spotify-downloader
+```
+
+## 🔑 Authentification
+Modifier `config.json` :
 ```json
 "AUTH": {
   "ENABLE": true,
   "PASSWORD": "VotreMotDePasse"
 }
 ```
-Les utilisateurs devront entrer ce mot de passe pour accéder au bot. Les comptes autorisés seront enregistrés dans le fichier de configuration.
 
-## 🎧 Téléchargement de musique
+## 🎧 Fonctionnalités
+- Téléchargement de :
+  - ✅ Chansons individuelles
+  - ✅ Albums complets
+  - ✅ Playlists entières
+  - ✅ Discographies d'artistes
 
-Le bot supporte plusieurs outils pour récupérer la musique à partir des liens Spotify. Choisissez votre préféré dans le fichier de config :
+## 🛠 Outils Supportés
+- **SpotDL** (Python)
+- **SpotifyDL** (JavaScript)
 
-- **SpotDL (Python)** : [Spotify Downloader](https://github.com/spotDL/spotify-downloader)
-- **SpotifyDL (JavaScript)** : [Spotify DL](https://github.com/SwapnilSoni1999/spotify-dl)
+## 📸 Aperçu
+<img src="demo.png" width="450" />
 
-⚠ **Attention** : La version 3 de SpotDL a des bugs, il est recommandé d’utiliser SpotifyDL.
-
-## 🐳 Docker
-
-Envie de lancer ça proprement avec Docker ? C’est facile !
-```bash
-docker build -t telegram-spotify-downloader .
-docker run -d telegram-spotify-downloader
-```
-
-## ☁️ Déploiement sur Heroku
-
-Si vous voulez héberger le bot sur Heroku, voici comment faire :
-1. Modifiez `config.json` si nécessaire et committez vos changements.
-2. Ajoutez votre token de bot dans un fichier `.env` :
-   ```
-   TELEGRAM_TOKEN=VOTRE_TOKEN_ICI
-   ```
-3. Exécutez :
-   ```
-   ./heroku_deploy.sh
-   ```
-
-## ✅ TODO
-- [x] Mettre à jour le Dockerfile
-- [ ] Ajouter une barre de progression pour le téléchargement
+## ✅ Roadmap
+- [x] Support multi-plateforme
+- [x] Déploiement facile
+- [x] Affichage progression
+- [ ] Interface web
 
 ---
 
 🐾 **Développé avec amour par [Tiger-Foxx](https://github.com/Tiger-Foxx) !** 🦊🔥
-
